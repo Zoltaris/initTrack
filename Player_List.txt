@@ -1,0 +1,5 @@
+Name, Initiative Modifier
+Trav, 2
+Paul, 4
+Adam, 1
+Lulu, 5
