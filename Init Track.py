@@ -11,9 +11,6 @@ n = 0
 Players=[]
 Enemies=[]
 Participant=[]
-newCombat = True
-answered = False
-
 
 
 class Entity:
@@ -43,9 +40,13 @@ with open('Player_List.txt') as csv_file:
 while(n < enemyNo):
     nameEnter=input("What is the name of the enemy, with a description?")
     modEnter=int(input("What is their iniitiative Modifier?"))
-    e = Entity(nameEnter, modEnter)
-    Enemies.append(e)
-    n=n+1
+    while (modEnter >= 11 or modEnter <= -11):
+        f = 'Please enter a number between -10 and 10:'
+        modEnter = int(input(f))
+    else:
+        e = Entity(nameEnter, modEnter)
+        Enemies.append(e)
+        n=n+1
 
 for enemy in Enemies:
     enemy.initRol = random.randrange(dieMin, dieMax)
@@ -56,9 +57,13 @@ for enemy in Enemies:
 for player in Players:
     z = 'What did '+ player.name+ ' roll?'
     player.initRol = int(input(z))
-    player.initVal = player.initRol + int(player.initMod)
-    Participant.append(player)
-
+    while (player.initRol >= 21):
+        w = 'Please enter only what the player rolled:'
+        player.initRol = int(input(w))
+    else:
+        player.initVal = player.initRol + int(player.initMod)
+        Participant.append(player)
+        
 
 Participant.sort(key=lambda participant: participant.initVal, reverse=True)
 print("Name                 Initiative                      Modifier")
